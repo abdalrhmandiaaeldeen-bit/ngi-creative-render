@@ -124,8 +124,10 @@ app.post('/render', async (req, res) => {
     const mime = detectMime(buffer);
     const photoDataUri = `data:${mime};base64,${photoBase64}`;
 
+    // Only "highlight" still uses pillarbox bars; "pricecard" and "lifestyle"
+    // are full-bleed, so skip the extra image-processing work for them.
     let pillarboxColor = overrideColor;
-    if (!pillarboxColor && template !== 'lifestyle') {
+    if (!pillarboxColor && template === 'highlight') {
       pillarboxColor = await extractBarColor(buffer);
     }
 
