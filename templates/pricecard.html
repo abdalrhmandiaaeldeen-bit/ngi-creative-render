@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NGI — Price Card</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@600&display=swap');
+</style>
+</head>
+<body>
+
+<div style="width: 1080px; height: 1350px; position: relative; overflow: hidden; background: #111; font-family: 'Playfair Display', Georgia, serif;">
+
+  <!-- Pillarbox bars -->
+  <div style="position: absolute; left: 0; top: 0; width: 90px; height: 1350px; background: {{pillarboxColor}}; z-index: 3;"></div>
+  <div style="position: absolute; right: 0; top: 0; width: 90px; height: 1350px; background: {{pillarboxColor}}; z-index: 3;"></div>
+
+  <!-- Photo -->
+  <img src="{{photoDataUri}}" style="position: absolute; left: 90px; top: 0; width: 900px; height: 1350px; object-fit: cover; z-index: 1;">
+
+  <!-- Scrims — stronger here, more text sits on the photo -->
+  <div style="position: absolute; left: 90px; top: 0; width: 900px; height: 1350px; background: linear-gradient(180deg, rgba(0,0,0,0) 42%, rgba(0,0,0,0.68) 100%); z-index: 2;"></div>
+  <div style="position: absolute; left: 90px; top: 0; width: 900px; height: 260px; background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 100%); z-index: 2;"></div>
+
+  <!-- Logo + tagline, top-left on photo -->
+  <div style="position: absolute; left: 130px; top: 56px; z-index: 4; display: flex; flex-direction: column; gap: 2px;">
+    <div style="font-size: 44px; font-weight: 700; letter-spacing: 3px; color: {{accentGold}}; text-shadow: 0 2px 10px rgba(0,0,0,0.45);">NGI</div>
+    <div style="font-family: 'Dancing Script', cursive; font-size: 24px; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.5); margin-top: -6px;">New Life</div>
+  </div>
+
+  <!-- Price, payment plans, specs — floating directly on the photo, no card/box -->
+  <div style="position: absolute; left: 130px; bottom: 140px; width: 820px; z-index: 4; display: flex; flex-direction: column; gap: 16px;">
+
+    <div>
+      <div style="font-family: system-ui, sans-serif; font-size: 20px; font-weight: 600; letter-spacing: 3px; color: {{accentGold}}; text-shadow: 0 1px 6px rgba(0,0,0,0.5);">{{priceLabel}}</div>
+      <div style="font-size: 72px; font-weight: 700; color: #fff; text-shadow: 0 3px 16px rgba(0,0,0,0.6); line-height: 1;">{{priceText}}</div>
+    </div>
+
+    <div style="font-size: 32px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.55);">{{paymentRow}}</div>
+
+    <div style="font-family: system-ui, sans-serif; font-size: 26px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5); letter-spacing: 0.5px;">{{specsText}}</div>
+
+  </div>
+
+  <!-- Footer: website + phone directly on photo -->
+  <div style="position: absolute; left: 130px; bottom: 56px; z-index: 4; display: flex; align-items: center; gap: 10px;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.8-3.8-9S9.5 5.5 12 3Z"/>
+    </svg>
+    <div style="font-family: system-ui, sans-serif; font-size: 20px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">{{website}}</div>
+  </div>
+  <div style="position: absolute; right: 130px; bottom: 56px; z-index: 4; display: flex; align-items: center; gap: 10px;">
+    <div style="font-family: system-ui, sans-serif; font-size: 20px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">{{phone}}</div>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
+      <path d="M6.6 10.8c1.5 3 4.1 5.6 7.1 7.1l2.4-2.4c.3-.3.7-.4 1.1-.3 1.3.4 2.7.6 4.1.6.7 0 1.2.6 1.2 1.3v3.6c0 .7-.6 1.3-1.3 1.3C10.8 22 2 13.2 2 2.3 2 1.6 2.6 1 3.3 1h3.6c.7 0 1.3.5 1.3 1.2 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.1L6.6 10.8Z" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+</div>
+
+</body>
+</html>

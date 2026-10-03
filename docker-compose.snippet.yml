@@ -1,0 +1,13 @@
+# أضف الجزء ده جوه services: في docker-compose.yml بتاع n8n (نفس الملف، مش ملف جديد).
+# غيّر "n8n_default" باسم الـ network الحقيقي بتاعك (شوف ملاحظة تحت).
+
+  ngi-render:
+    build: ./ngi-creative-render
+    container_name: ngi-render
+    restart: unless-stopped
+    networks:
+      - n8n_default   # <-- غيّرها لاسم الـ network بتاع n8n الموجود فعليًا
+
+# ملاحظة: افتح docker-compose.yml وشوف تحت service بتاع n8n قسم "networks:"
+# المكتوب فيه — ده الاسم اللي تحطه هنا بالظبط عشان الاتنين يتكلموا مع بعض.
+# لو مش لاقي قسم "networks" خالص تحت n8n، قولي وهنضيفه مع بعض.

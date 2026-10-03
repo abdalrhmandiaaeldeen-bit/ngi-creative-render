@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NGI — Lifestyle</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@600&display=swap');
+</style>
+</head>
+<body>
+
+<div style="width: 1080px; height: 1350px; position: relative; overflow: hidden; background: #111; font-family: 'Playfair Display', Georgia, serif;">
+
+  <img src="{{photoDataUri}}" style="position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; object-fit: cover; z-index: 1;">
+
+  <!-- Gentle top scrim so the logo stays legible on any photo -->
+  <div style="position: absolute; left: 0; top: 0; width: 1080px; height: 220px; background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0) 100%); z-index: 2;"></div>
+
+  <!-- Logo + tagline only — small, corner, nothing else on the post -->
+  <div style="position: absolute; left: 56px; top: 50px; z-index: 3; display: flex; flex-direction: column; gap: 2px;">
+    <div style="font-size: 36px; font-weight: 700; letter-spacing: 3px; color: {{accentGold}}; text-shadow: 0 2px 10px rgba(0,0,0,0.45);">NGI</div>
+    <div style="font-family: 'Dancing Script', cursive; font-size: 19px; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.5); margin-top: -4px;">New Life</div>
+  </div>
+
+</div>
+
+</body>
+</html>
