@@ -21,16 +21,16 @@
   <div style="position: absolute; left: 0; top: 0; width: 1080px; height: 240px; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); z-index: 2;"></div>
 
   <!-- Logo + tagline, top-left on photo -->
-  <div style="position: absolute; left: 70px; top: 56px; z-index: 4; display: flex; flex-direction: column; gap: 2px;">
-    <div style="font-size: 44px; font-weight: 700; letter-spacing: 3px; color: {{accentGold}}; text-shadow: 0 2px 10px rgba(0,0,0,0.65);">NGI</div>
-    <div style="font-family: 'Dancing Script', cursive; font-size: 24px; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.65); margin-top: -6px;">New Life</div>
+  <div style="position: absolute; left: 70px; top: 56px; z-index: 4; display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 44px; font-weight: 700; letter-spacing: 3px; color: {{accentGold}}; text-shadow: -1px -1px 0 rgba(0,0,0,0.85), 1px -1px 0 rgba(0,0,0,0.85), -1px 1px 0 rgba(0,0,0,0.85), 1px 1px 0 rgba(0,0,0,0.85), 0 4px 14px rgba(0,0,0,0.8);">NGI</div>
+    <div style="font-family: system-ui, sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.75);">New Generation Investment</div>
   </div>
 
   <!-- Price, payment plans, specs — floating directly on the photo, no card/box -->
   <div style="position: absolute; left: 70px; bottom: 140px; width: 940px; z-index: 4; display: flex; flex-direction: column; gap: 16px;">
 
     <div>
-      <div style="font-family: system-ui, sans-serif; font-size: 20px; font-weight: 600; letter-spacing: 3px; color: {{accentGold}}; text-shadow: 0 2px 8px rgba(0,0,0,0.85);">{{priceLabel}}</div>
+      <div style="font-family: system-ui, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 3px; color: {{accentGold}}; text-shadow: -1px -1px 0 rgba(0,0,0,0.9), 1px -1px 0 rgba(0,0,0,0.9), -1px 1px 0 rgba(0,0,0,0.9), 1px 1px 0 rgba(0,0,0,0.9), 0 4px 14px rgba(0,0,0,0.85);">{{priceLabel}}</div>
       <div style="font-size: 72px; font-weight: 700; color: #fff; text-shadow: 0 3px 20px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.9); line-height: 1;">{{priceText}}</div>
     </div>
 
@@ -41,16 +41,16 @@
   </div>
 
   <!-- Footer: website + phone directly on photo -->
-  <div style="position: absolute; left: 70px; bottom: 56px; z-index: 4; display: flex; align-items: center; gap: 10px;">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
+  <div style="position: absolute; left: 70px; bottom: 56px; z-index: 4; display: flex; align-items: center; gap: 12px;">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
       <circle cx="12" cy="12" r="9"/>
       <path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.8-3.8-9S9.5 5.5 12 3Z"/>
     </svg>
-    <div style="font-family: system-ui, sans-serif; font-size: 20px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.65);">{{website}}</div>
+    <div style="font-family: system-ui, sans-serif; font-size: 28px; font-weight: 500; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9);">{{website}}</div>
   </div>
-  <div style="position: absolute; right: 70px; bottom: 56px; z-index: 4; display: flex; align-items: center; gap: 10px;">
-    <div style="font-family: system-ui, sans-serif; font-size: 20px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.65);">{{phone}}</div>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
+  <div style="position: absolute; right: 70px; bottom: 56px; z-index: 4; display: flex; align-items: center; gap: 12px;">
+    <div style="font-family: system-ui, sans-serif; font-size: 28px; font-weight: 500; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9);">{{phone}}</div>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
       <path d="M6.6 10.8c1.5 3 4.1 5.6 7.1 7.1l2.4-2.4c.3-.3.7-.4 1.1-.3 1.3.4 2.7.6 4.1.6.7 0 1.2.6 1.2 1.3v3.6c0 .7-.6 1.3-1.3 1.3C10.8 22 2 13.2 2 2.3 2 1.6 2.6 1 3.3 1h3.6c.7 0 1.3.5 1.3 1.2 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.1L6.6 10.8Z" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
