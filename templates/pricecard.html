@@ -16,9 +16,9 @@
   <!-- Photo: full bleed, covers the whole canvas, no pillarbox bars -->
   <img src="{{photoDataUri}}" style="position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; object-fit: cover; z-index: 1;">
 
-  <!-- Scrims — strong enough to keep text readable regardless of how bright the photo is -->
-  <div style="position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.18) 32%, rgba(0,0,0,0.58) 64%, rgba(0,0,0,0.9) 100%); z-index: 2;"></div>
-  <div style="position: absolute; left: 0; top: 0; width: 1080px; height: 320px; background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%); z-index: 2;"></div>
+  <!-- Scrims — light touch, only darkens the lower third where the text sits; text itself leans on a strong drop-shadow for contrast, not a dark wash over the whole photo -->
+  <div style="position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.04) 48%, rgba(0,0,0,0.32) 74%, rgba(0,0,0,0.6) 100%); z-index: 2;"></div>
+  <div style="position: absolute; left: 0; top: 0; width: 1080px; height: 240px; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); z-index: 2;"></div>
 
   <!-- Logo + tagline, top-left on photo -->
   <div style="position: absolute; left: 70px; top: 56px; z-index: 4; display: flex; flex-direction: column; gap: 2px;">
@@ -30,13 +30,13 @@
   <div style="position: absolute; left: 70px; bottom: 140px; width: 940px; z-index: 4; display: flex; flex-direction: column; gap: 16px;">
 
     <div>
-      <div style="font-family: system-ui, sans-serif; font-size: 20px; font-weight: 600; letter-spacing: 3px; color: {{accentGold}}; text-shadow: 0 1px 6px rgba(0,0,0,0.65);">{{priceLabel}}</div>
-      <div style="font-size: 72px; font-weight: 700; color: #fff; text-shadow: 0 3px 18px rgba(0,0,0,0.8); line-height: 1;">{{priceText}}</div>
+      <div style="font-family: system-ui, sans-serif; font-size: 20px; font-weight: 600; letter-spacing: 3px; color: {{accentGold}}; text-shadow: 0 2px 8px rgba(0,0,0,0.85);">{{priceLabel}}</div>
+      <div style="font-size: 72px; font-weight: 700; color: #fff; text-shadow: 0 3px 20px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.9); line-height: 1;">{{priceText}}</div>
     </div>
 
-    <div style="font-size: 32px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.75);">{{paymentRow}}</div>
+    <div style="font-size: 32px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.9);">{{paymentRow}}</div>
 
-    <div style="font-family: system-ui, sans-serif; font-size: 26px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.7); letter-spacing: 0.5px;">{{specsText}}</div>
+    <div style="font-family: system-ui, sans-serif; font-size: 26px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.85); letter-spacing: 0.5px;">{{specsText}}</div>
 
   </div>
 
