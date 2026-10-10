@@ -1,0 +1,27 @@
+/* NGI brand tokens — shared by every brand_* template.
+   Colours sampled from the official logo (gold gradient + bronze tagline). */
+:root {
+  --gold-1: #E3CBA3;      /* logo highlight */
+  --gold-2: #CDAA7B;      /* logo mid */
+  --gold-3: #A87B4F;      /* logo base / tagline bronze */
+  --gold-grad: linear-gradient(180deg, #E3CBA3 0%, #CDAA7B 55%, #A87B4F 100%);
+  --ivory: #F7F4EE;
+  --ivory-2: #EFE9DF;
+  --ink: #14181E;
+  --ink-2: #1E242C;
+  --muted-dark: #6B645A;  /* secondary text on ivory */
+  --muted-light: #C9C1B4; /* secondary text on ink */
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Montserrat', 'Tajawal', Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; }
+body { font-family: var(--sans); -webkit-font-smoothing: antialiased; font-variant-numeric: lining-nums; }
+.canvas { width: 1080px; height: 1350px; position: relative; overflow: hidden; }
+.photo { position: absolute; object-fit: cover; display: block; }
+.eyebrow { font-family: var(--sans); font-weight: 600; text-transform: uppercase; letter-spacing: 0.32em; }
+.gold-text { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.rule { height: 2px; background: var(--gold-grad); }
+/* Any block whose value is empty disappears, so missing data never leaves a gap or a dangling label */
+[data-opt]:has(> .v:empty) { display: none; }
+.v:empty { display: none; }

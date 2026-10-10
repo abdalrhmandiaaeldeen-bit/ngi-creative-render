@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NGI — Ink Luxe</title>
+<style>
+{{brandCss}}
+.canvas { background: var(--ink); }
+.canvas .photo { left: 0; top: 0; width: 1080px; height: 860px; }
+.fade { position: absolute; left: 0; top: 560px; width: 1080px; height: 302px; background: linear-gradient(180deg, rgba(20,24,30,0) 0%, rgba(20,24,30,0.85) 70%, var(--ink) 100%); }
+.border { position: absolute; inset: 30px; border: 1.5px solid rgba(205,170,123,0.7); pointer-events: none; z-index: 5; }
+.badge { position: absolute; right: 30px; top: 74px; background: var(--gold-grad); color: var(--ink); padding: 14px 30px; font-size: 16px; z-index: 6; }
+.panel { position: absolute; left: 84px; right: 84px; top: 760px; }
+.panel .loc { font-size: 17px; color: var(--gold-2); }
+.panel h1 { margin-top: 14px; font-family: var(--serif); font-weight: 600; font-size: 74px; line-height: 1; color: var(--ivory); }
+.panel .sub { margin-top: 14px; font-size: 18px; color: var(--muted-light); }
+.panel .rule { width: 120px; margin: 34px 0 30px; }
+.row { display: flex; justify-content: space-between; align-items: flex-end; }
+.price .eyebrow { font-size: 15px; color: var(--muted-light); }
+.price .amt { margin-top: 10px; font-family: var(--serif); font-weight: 700; font-size: 80px; line-height: 0.95; white-space: nowrap; }
+.plan { text-align: right; }
+.plan div { font-size: 22px; color: var(--ivory); font-weight: 500; line-height: 1.6; }
+.plan b { color: var(--gold-1); font-weight: 700; }
+.specs { margin-top: 30px; display: flex; gap: 0; font-size: 20px; color: var(--muted-light); font-weight: 500; letter-spacing: 0.04em; }
+.specs > div + div::before { content: '◆'; color: var(--gold-3); font-size: 11px; margin: 0 18px; position: relative; top: -3px; }
+.foot { position: absolute; left: 84px; right: 84px; bottom: 66px; display: flex; align-items: center; justify-content: space-between; }
+.foot img { height: 72px; }
+.foot .contact { text-align: right; color: var(--ivory); font-size: 22px; font-weight: 500; line-height: 1.55; letter-spacing: 0.03em; }
+.foot .contact span { color: var(--gold-1); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <img class="photo" src="{{photoDataUri}}">
+  <div class="fade"></div>
+  <div class="border"></div>
+  <div class="badge eyebrow" data-opt><span class="v">{{badge}}</span></div>
+
+  <div class="panel">
+    <div class="loc eyebrow" data-opt><span class="v">{{location}}</span></div>
+    <h1>{{projectName}}</h1>
+    <div class="sub eyebrow" data-opt><span class="v">{{subtitle}}</span></div>
+    <div class="rule"></div>
+    <div class="row">
+      <div class="price">
+        <div class="eyebrow">{{priceLabel}}</div>
+        <div class="amt gold-text">{{priceText}}</div>
+      </div>
+      <div class="plan">
+        <div data-opt><b class="v">{{downPayment}}</b> {{downPaymentLabel}}</div>
+        <div data-opt>Up to <b class="v">{{installmentYears}}</b></div>
+      </div>
+    </div>
+    <div class="specs">
+      <div data-opt><span class="v">{{areaText}}</span></div>
+      <div data-opt><span class="v">{{bedsText}}</span></div>
+      <div data-opt><span class="v">{{extraText}}</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <img src="{{logoGold}}" alt="NGI">
+    <div class="contact"><span>{{phone}}</span><br>{{website}}</div>
+  </div>
+</div>
+</body>
+</html>

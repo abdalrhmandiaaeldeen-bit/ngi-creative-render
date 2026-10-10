@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NGI — Ivory Frame</title>
+<style>
+{{brandCss}}
+.canvas { background: var(--ivory); }
+.top { position: absolute; left: 64px; right: 64px; top: 50px; height: 92px; display: flex; align-items: center; justify-content: space-between; }
+.top img { height: 92px; }
+.top .loc { font-size: 17px; color: var(--gold-3); text-align: right; line-height: 1.7; }
+.frame { position: absolute; left: 64px; top: 170px; width: 952px; height: 720px; }
+.frame .photo { left: 0; top: 0; width: 952px; height: 720px; }
+.frame::after { content: ''; position: absolute; inset: 16px; border: 1.5px solid rgba(247,244,238,0.75); pointer-events: none; }
+.badge { position: absolute; left: 0; top: 40px; background: var(--ink); color: var(--gold-1); padding: 14px 26px 14px 34px; font-size: 16px; z-index: 2; }
+.chips { position: absolute; left: 36px; bottom: 36px; display: flex; gap: 12px; z-index: 2; }
+.chip { background: rgba(247,244,238,0.94); color: var(--ink); padding: 14px 22px; display: flex; align-items: center; gap: 12px; font-size: 21px; font-weight: 600; }
+.chip svg { width: 24px; height: 24px; stroke: var(--gold-3); fill: none; stroke-width: 1.6; }
+.title { position: absolute; left: 64px; right: 64px; top: 922px; }
+.title h1 { font-family: var(--serif); font-weight: 600; font-size: 70px; line-height: 1; color: var(--ink); letter-spacing: -0.5px; }
+.title .sub { margin-top: 14px; font-size: 18px; color: var(--muted-dark); }
+.deal { position: absolute; left: 64px; right: 64px; top: 1080px; display: flex; align-items: stretch; justify-content: space-between; }
+.price .eyebrow { font-size: 16px; color: var(--gold-3); }
+.price .amt { margin-top: 10px; font-family: var(--serif); font-weight: 700; font-size: 74px; line-height: 1; color: var(--ink); white-space: nowrap; }
+.plan { display: flex; gap: 34px; padding-left: 40px; border-left: 2px solid var(--gold-2); align-items: center; }
+.plan .n { font-family: var(--serif); font-weight: 700; font-size: 60px; line-height: 1; color: var(--gold-3); }
+.plan .l { margin-top: 8px; font-size: 13px; color: var(--muted-dark); }
+.foot { position: absolute; left: 0; right: 0; bottom: 0; height: 104px; background: var(--ink); display: flex; align-items: center; justify-content: space-between; padding: 0 64px; color: var(--ivory); font-size: 24px; font-weight: 500; letter-spacing: 0.5px; }
+.foot .r { display: flex; align-items: center; gap: 14px; }
+.foot svg { width: 26px; height: 26px; stroke: var(--gold-1); fill: none; stroke-width: 1.6; }
+.foot .cta { color: var(--gold-1); font-size: 16px; }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="top">
+    <img src="{{logoGold}}" alt="NGI">
+    <div class="loc eyebrow" data-opt><span class="v">{{location}}</span></div>
+  </div>
+
+  <div class="frame">
+    <img class="photo" src="{{photoDataUri}}">
+    <div class="badge eyebrow" data-opt><span class="v">{{badge}}</span></div>
+    <div class="chips">
+      <div class="chip" data-opt><svg viewBox="0 0 24 24"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></svg><span class="v">{{areaText}}</span></div>
+      <div class="chip" data-opt><svg viewBox="0 0 24 24"><path d="M3 18V8M21 18v-5H3M7 13V10h5v3"/></svg><span class="v">{{bedsText}}</span></div>
+      <div class="chip" data-opt><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V10l6-5 6 5v10M10 20v-5h4v5"/></svg><span class="v">{{extraText}}</span></div>
+    </div>
+  </div>
+
+  <div class="title">
+    <h1>{{projectName}}</h1>
+    <div class="sub eyebrow" data-opt><span class="v">{{subtitle}}</span></div>
+  </div>
+
+  <div class="deal">
+    <div class="price">
+      <div class="eyebrow">{{priceLabel}}</div>
+      <div class="amt">{{priceText}}</div>
+    </div>
+    <div class="plan" data-opt>
+      <div data-opt><div class="n v">{{downPayment}}</div><div class="l eyebrow">{{downPaymentLabel}}</div></div>
+      <div data-opt><div class="n v">{{installmentYears}}</div><div class="l eyebrow">Installments</div></div>
+      <span class="v" style="display:none">{{downPayment}}{{installmentYears}}</span>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="r"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.8-3.8-9S9.5 5.5 12 3Z"/></svg>{{website}}</div>
+    <div class="r"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 3 4.1 5.6 7.1 7.1l2.4-2.4c.3-.3.7-.4 1.1-.3 1.3.4 2.7.6 4.1.6.7 0 1.2.6 1.2 1.3v3.6c0 .7-.6 1.3-1.3 1.3C10.8 22 2 13.2 2 2.3 2 1.6 2.6 1 3.3 1h3.6c.7 0 1.3.5 1.3 1.2 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.1L6.6 10.8Z"/></svg>{{phone}}</div>
+  </div>
+
+</div>
+</body>
+</html>

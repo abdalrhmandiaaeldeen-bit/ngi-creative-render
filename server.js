@@ -7,11 +7,38 @@ const path = require('path');
 const app = express();
 app.use(express.json({ limit: '15mb' }));
 
+const readTpl = (name) => fs.readFileSync(path.join(__dirname, 'templates', name + '.html'), 'utf8');
 const TEMPLATES = {
-  lifestyle: fs.readFileSync(path.join(__dirname, 'templates', 'lifestyle.html'), 'utf8'),
-  highlight: fs.readFileSync(path.join(__dirname, 'templates', 'highlight.html'), 'utf8'),
-  pricecard: fs.readFileSync(path.join(__dirname, 'templates', 'pricecard.html'), 'utf8'),
+  lifestyle: readTpl('lifestyle'),
+  highlight: readTpl('highlight'),
+  pricecard: readTpl('pricecard'),
+  brand_ivory: readTpl('brand_ivory'),
+  brand_ink: readTpl('brand_ink'),
+  brand_card: readTpl('brand_card'),
 };
+
+// Brand assets are embedded as data URIs so a render never depends on the
+// network (Google Fonts was never actually loading inside the container).
+const ASSETS = path.join(__dirname, 'assets');
+const FONT_FACES = [
+  ['Montserrat', 400, 'normal', 'montserrat-latin-400-normal'],
+  ['Montserrat', 500, 'normal', 'montserrat-latin-500-normal'],
+  ['Montserrat', 600, 'normal', 'montserrat-latin-600-normal'],
+  ['Montserrat', 700, 'normal', 'montserrat-latin-700-normal'],
+  ['Cormorant Garamond', 500, 'normal', 'cormorant-garamond-latin-500-normal'],
+  ['Cormorant Garamond', 500, 'italic', 'cormorant-garamond-latin-500-italic'],
+  ['Cormorant Garamond', 600, 'normal', 'cormorant-garamond-latin-600-normal'],
+  ['Cormorant Garamond', 700, 'normal', 'cormorant-garamond-latin-700-normal'],
+  ['Tajawal', 400, 'normal', 'tajawal-arabic-400-normal'],
+  ['Tajawal', 500, 'normal', 'tajawal-arabic-500-normal'],
+  ['Tajawal', 700, 'normal', 'tajawal-arabic-700-normal'],
+];
+const fontCss = FONT_FACES.map(([family, weight, style, file]) => {
+  const b64 = fs.readFileSync(path.join(ASSETS, 'fonts', file + '.woff2')).toString('base64');
+  return `@font-face{font-family:'${family}';font-weight:${weight};font-style:${style};font-display:block;src:url(data:font/woff2;base64,${b64}) format('woff2');}`;
+}).join('\n');
+const BRAND_CSS = fontCss + '\n' + fs.readFileSync(path.join(__dirname, 'templates', '_brand.css'), 'utf8');
+const LOGO_GOLD = 'data:image/png;base64,' + fs.readFileSync(path.join(ASSETS, 'ngi-logo-gold.png')).toString('base64');
 
 const SIZE = { width: 1080, height: 1350 };
 
@@ -30,7 +57,7 @@ function escapeHtml(str) {
 function fillTemplate(html, data) {
   return html.replace(/\{\{(\w+)\}\}/g, (match, key) => {
     if (!(key in data) || data[key] == null) return '';
-    if (key === 'photoDataUri' || /Color$/i.test(key)) return data[key];
+    if (key === 'photoDataUri' || key === 'brandCss' || key === 'logoGold' || /Color$/i.test(key)) return data[key];
     return escapeHtml(data[key]);
   });
 }
@@ -104,7 +131,7 @@ async function extractBarColor(buffer) {
 let browserPromise;
 function getBrowser() {
   if (!browserPromise) {
-    browserPromise = chromium.launch({ args: ['--no-sandbox'] });
+    browserPromise = chromium.launch({ args: ['--no-sandbox'], executablePath: process.env.CHROMIUM_PATH || undefined });
   }
   return browserPromise;
 }
@@ -114,7 +141,7 @@ app.post('/render', async (req, res) => {
     const { template, photoBase64, pillarboxColor: overrideColor, ...fields } = req.body || {};
 
     if (!template || !TEMPLATES[template]) {
-      return res.status(400).json({ error: `Unknown template "${template}". Use lifestyle | highlight | pricecard.` });
+      return res.status(400).json({ error: `Unknown template "${template}". Use one of: ${Object.keys(TEMPLATES).join(' | ')}.` });
     }
     if (!photoBase64) {
       return res.status(400).json({ error: 'photoBase64 is required (base64 string, no data: prefix)' });
@@ -135,7 +162,11 @@ app.post('/render', async (req, res) => {
       accentGold: '#F5E1B8',
       website: 'www.ngiproperty.com',
       phone: '+20 122 444 9009',
+      priceLabel: 'Price',
+      downPaymentLabel: 'Down payment',
       ...fields,
+      brandCss: BRAND_CSS,
+      logoGold: LOGO_GOLD,
       photoDataUri,
       pillarboxColor,
     });
@@ -143,6 +174,7 @@ app.post('/render', async (req, res) => {
     const browser = await getBrowser();
     const page = await browser.newPage({ viewport: SIZE });
     await page.setContent(html, { waitUntil: 'networkidle', timeout: 15000 });
+    await page.evaluate(() => document.fonts.ready);
     const png = await page.screenshot({ type: 'png' });
     await page.close();
 
@@ -154,6 +186,7 @@ app.post('/render', async (req, res) => {
   }
 });
 
+app.get('/', (_req, res) => res.json({ ok: true, templates: Object.keys(TEMPLATES) }));
 app.get('/health', (_req, res) => res.json({ ok: true }));
 
 const PORT = process.env.PORT || 3500;
