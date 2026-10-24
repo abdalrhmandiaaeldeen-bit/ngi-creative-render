@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NGI — Luxury minimal</title>
+<!-- Fields: highlight, typeLabel, city, priceText -->
+<style>
+  .card { background: #050505; }
+  .stage { left: 0; top: 0; width: 1080px; height: 1350px; }
+  .stage .fg { height: 820px; top: 110px; }
+  .fade { position: absolute; left: 0; right: 0; bottom: 0; height: 520px; background: linear-gradient(180deg, rgba(5,5,5,0) 0%, rgba(5,5,5,0.85) 45%, #050505 100%); z-index: 2; }
+  .copy { position: absolute; left: 90px; right: 90px; bottom: 150px; z-index: 3; text-align: center; }
+  .line { width: 120px; height: 2px; background: var(--gold); margin: 0 auto 30px; }
+  .headline { font-size: 62px; font-weight: 600; line-height: 1.12; font-style: italic; }
+  .meta { margin-top: 26px; font-size: 24px; font-weight: 600; letter-spacing: 6px; text-transform: uppercase; color: var(--gold-light); }
+  .meta span:empty { display: none; }
+  .meta span + span::before { content: '·'; margin: 0 16px; color: var(--gold); }
+  .price { margin-top: 18px; font-size: 26px; font-weight: 500; letter-spacing: 4px; color: #D6DCE5; }
+  .footer { z-index: 3; justify-content: center; gap: 60px; font-size: 24px; color: #C9CED6; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="stage"><img class="bg" src="{{photoDataUri}}"><img class="fg" src="{{photoDataUri}}"></div>
+  <div class="fade"></div>
+  <div class="copy">
+    <div class="line"></div>
+    <div class="headline serif">{{highlight}}</div>
+    <div class="meta"><span>{{typeLabel}}</span><span>{{city}}</span></div>
+    <div class="price">FROM {{priceText}}</div>
+  </div>
+  <div class="footer">
+    <div class="item">{{website}}</div>
+    <div class="item">{{phone}}</div>
+  </div>
+</div>
+</body>
+</html>

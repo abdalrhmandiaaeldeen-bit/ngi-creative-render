@@ -7,11 +7,34 @@ const path = require('path');
 const app = express();
 app.use(express.json({ limit: '15mb' }));
 
-const TEMPLATES = {
-  lifestyle: fs.readFileSync(path.join(__dirname, 'templates', 'lifestyle.html'), 'utf8'),
-  highlight: fs.readFileSync(path.join(__dirname, 'templates', 'highlight.html'), 'utf8'),
-  pricecard: fs.readFileSync(path.join(__dirname, 'templates', 'pricecard.html'), 'utf8'),
-};
+// Every templates/<name>.html is a template (lifestyle, highlight, pricecard, offer, payment, investment,
+// family, commercial, features, location, luxury, ...). Adding a template = adding a file.
+const TEMPLATE_DIR = path.join(__dirname, 'templates');
+const TEMPLATES = {};
+fs.readdirSync(TEMPLATE_DIR).filter((f) => f.endsWith('.html')).forEach((f) => {
+  TEMPLATES[f.replace(/\.html$/, '')] = fs.readFileSync(path.join(TEMPLATE_DIR, f), 'utf8');
+});
+
+// Brand fonts are bundled (fonts/*.woff2) and inlined, so renders look the same everywhere and never wait
+// on Google Fonts. Plus the shared brand stylesheet templates/_base.css.
+const FONT_DIR = path.join(__dirname, 'fonts');
+const FONT_FAMILIES = { 'playfair-display': 'Playfair Display', montserrat: 'Montserrat' };
+let FONT_CSS = '';
+if (fs.existsSync(FONT_DIR)) {
+  fs.readdirSync(FONT_DIR).filter((f) => f.endsWith('.woff2')).forEach((f) => {
+    const m = f.match(/^(.+)-latin-(\d+)-normal\.woff2$/);
+    if (!m || !FONT_FAMILIES[m[1]]) return;
+    const b64 = fs.readFileSync(path.join(FONT_DIR, f)).toString('base64');
+    FONT_CSS += `@font-face{font-family:'${FONT_FAMILIES[m[1]]}';font-style:normal;font-weight:${m[2]};font-display:block;src:url(data:font/woff2;base64,${b64}) format('woff2');}\n`;
+  });
+}
+const BASE_CSS_FILE = path.join(TEMPLATE_DIR, '_base.css');
+const BASE_CSS = fs.existsSync(BASE_CSS_FILE) ? fs.readFileSync(BASE_CSS_FILE, 'utf8') : '';
+function injectShared(html) {
+  // Injected FIRST in <head>, so each template's own <style> can override the shared rules.
+  const css = `<style>${FONT_CSS}${BASE_CSS}</style>`;
+  return /<head>/i.test(html) ? html.replace(/<head>/i, '<head>' + css) : css + html;
+}
 
 const SIZE = { width: 1080, height: 1350 };
 
@@ -104,7 +127,8 @@ async function extractBarColor(buffer) {
 let browserPromise;
 function getBrowser() {
   if (!browserPromise) {
-    browserPromise = chromium.launch({ args: ['--no-sandbox'] });
+    // CHROMIUM_PATH is only for local previews; the Docker image uses Playwright's own Chromium.
+    browserPromise = chromium.launch({ args: ['--no-sandbox'], executablePath: process.env.CHROMIUM_PATH || undefined });
   }
   return browserPromise;
 }
@@ -114,7 +138,7 @@ app.post('/render', async (req, res) => {
     const { template, photoBase64, pillarboxColor: overrideColor, ...fields } = req.body || {};
 
     if (!template || !TEMPLATES[template]) {
-      return res.status(400).json({ error: `Unknown template "${template}". Use lifestyle | highlight | pricecard.` });
+      return res.status(400).json({ error: `Unknown template "${template}". Use ${Object.keys(TEMPLATES).join(' | ')}.` });
     }
     if (!photoBase64) {
       return res.status(400).json({ error: 'photoBase64 is required (base64 string, no data: prefix)' });
@@ -131,7 +155,7 @@ app.post('/render', async (req, res) => {
       pillarboxColor = await extractBarColor(buffer);
     }
 
-    const html = fillTemplate(TEMPLATES[template], {
+    const html = fillTemplate(injectShared(TEMPLATES[template]), {
       accentGold: '#F5E1B8',
       website: 'www.ngiproperty.com',
       phone: '+20 122 444 9009',
@@ -155,6 +179,7 @@ app.post('/render', async (req, res) => {
 });
 
 app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/templates', (_req, res) => res.json({ templates: Object.keys(TEMPLATES).sort() }));
 
 const PORT = process.env.PORT || 3500;
 app.listen(PORT, () => console.log(`ngi-render listening on :${PORT}`));

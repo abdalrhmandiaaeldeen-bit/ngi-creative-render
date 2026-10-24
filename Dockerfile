@@ -9,6 +9,7 @@ RUN npm install --omit=dev
 
 COPY server.js ./
 COPY templates ./templates
+COPY fonts ./fonts
 
 ENV PORT=3500
 EXPOSE 3500

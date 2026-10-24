@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NGI — Location</title>
+<!-- Fields: kicker, locationText, dist1Min/dist1Place .. dist3Min/dist3Place, typeLabel, priceText -->
+<style>
+  .card { background: #FFFFFF; color: var(--navy); }
+  .stage { left: 0; top: 0; width: 1080px; height: 680px; }
+  .pin { position: absolute; left: 70px; top: 620px; width: 120px; height: 120px; border-radius: 50%; background: var(--gold); z-index: 5;
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
+  .pin svg { width: 60px; height: 60px; stroke: var(--navy); }
+  .copy { position: absolute; left: 70px; right: 70px; top: 770px; }
+  .loc { font-size: 50px; font-weight: 700; line-height: 1.12; margin-top: 12px; }
+  .dists { margin-top: 30px; display: flex; flex-direction: column; gap: 14px; }
+  .dist { display: flex; align-items: baseline; gap: 18px; border-bottom: 1px solid #E5E7EB; padding-bottom: 12px; }
+  .dist:has(.m:empty) { display: none; }
+  .dist .m { font-family: 'Playfair Display', Georgia, serif; font-size: 52px; font-weight: 700; color: var(--gold); min-width: 70px; text-align: right; }
+  .dist .u { font-size: 22px; font-weight: 700; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  .dist .p { font-size: 30px; font-weight: 600; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: var(--navy); }
+  .price { position: absolute; right: 70px; top: 790px; text-align: right; font-size: 20px; font-weight: 700; letter-spacing: 3px; color: var(--muted); }
+  .price b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 40px; letter-spacing: 0; color: var(--navy); margin-top: 4px; }
+  .price i { display: block; font-style: normal; font-size: 22px; letter-spacing: 1px; color: var(--navy-2); margin-top: 4px; }
+  .footer { color: #fff; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="stage"><img class="bg" src="{{photoDataUri}}"><img class="fg" src="{{photoDataUri}}"></div>
+  <div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+  <div class="copy">
+    <div class="kicker">{{kicker}}</div>
+    <div class="loc serif" style="max-width: 600px;">{{locationText}}</div>
+    <div class="dists">
+      <div class="dist"><span class="m">{{dist1Min}}</span><span class="u">min</span><span class="p">{{dist1Place}}</span></div>
+      <div class="dist"><span class="m">{{dist2Min}}</span><span class="u">min</span><span class="p">{{dist2Place}}</span></div>
+      <div class="dist"><span class="m">{{dist3Min}}</span><span class="u">min</span><span class="p">{{dist3Place}}</span></div>
+    </div>
+  </div>
+  <div class="price">FROM<b>{{priceText}}</b><i>{{typeLabel}}</i></div>
+  <div class="bar"></div>
+  <div class="footer" style="bottom: 40px;">
+    <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.8-3.8-9S9.5 5.5 12 3Z"/></svg>{{website}}</div>
+    <div class="item">{{phone}}<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M6.6 10.8c1.5 3 4.1 5.6 7.1 7.1l2.4-2.4c.3-.3.7-.4 1.1-.3 1.3.4 2.7.6 4.1.6.7 0 1.2.6 1.2 1.3v3.6c0 .7-.6 1.3-1.3 1.3C10.8 22 2 13.2 2 2.3 2 1.6 2.6 1 3.3 1h3.6c.7 0 1.3.5 1.3 1.2 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.1L6.6 10.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+/* Shared NGI brand styles, injected into every template by server.js (fonts come from /fonts as data URIs). */
+:root {
+  --navy: #0E1A2B;
+  --navy-2: #162840;
+  --gold: #C9A45C;
+  --gold-light: #F5E1B8;
+  --cream: #F6F1E8;
+  --ink: #1C1C1C;
+  --muted: #6B7280;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+.card {
+  width: 1080px; height: 1350px; position: relative; overflow: hidden;
+  font-family: 'Montserrat', 'Inter', 'DejaVu Sans', sans-serif; color: #fff;
+}
+.serif { font-family: 'Playfair Display', Georgia, 'DejaVu Serif', serif; }
+
+/* Photo stage: the WHOLE photo (object-fit: contain) on a blurred, darkened copy of itself — nothing is cropped,
+   so the NGI logo already printed on the photo always stays visible. */
+.stage { position: absolute; overflow: hidden; background: #0b0b0b; }
+.stage .bg {
+  position: absolute; left: -60px; top: -60px; width: calc(100% + 120px); height: calc(100% + 120px);
+  object-fit: cover; filter: blur(32px) brightness(0.55) saturate(1.1);
+}
+.stage .fg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; }
+
+.kicker { font-size: 24px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); }
+.empty-hide:empty { display: none; }
+
+/* Footer: website + phone */
+.footer { position: absolute; left: 70px; right: 70px; bottom: 52px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 26px; font-weight: 500; }
+.footer .item { display: flex; align-items: center; gap: 12px; }
+.footer svg { width: 26px; height: 26px; }
