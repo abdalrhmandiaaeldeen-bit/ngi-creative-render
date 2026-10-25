@@ -18,7 +18,7 @@ fs.readdirSync(TEMPLATE_DIR).filter((f) => f.endsWith('.html')).forEach((f) => {
 // Brand fonts are bundled (fonts/*.woff2) and inlined, so renders look the same everywhere and never wait
 // on Google Fonts. Plus the shared brand stylesheet templates/_base.css.
 const FONT_DIR = path.join(__dirname, 'fonts');
-const FONT_FAMILIES = { 'playfair-display': 'Playfair Display', montserrat: 'Montserrat' };
+const FONT_FAMILIES = { 'playfair-display': 'Playfair Display', montserrat: 'Montserrat', 'plus-jakarta-sans': 'Plus Jakarta Sans' };
 let FONT_CSS = '';
 if (fs.existsSync(FONT_DIR)) {
   fs.readdirSync(FONT_DIR).filter((f) => f.endsWith('.woff2')).forEach((f) => {

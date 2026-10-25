@@ -1,20 +1,23 @@
 /* Shared NGI brand styles, injected into every template by server.js (fonts come from /fonts as data URIs). */
 :root {
-  --navy: #0E1A2B;
-  --navy-2: #162840;
-  --gold: #C9A45C;
-  --gold-light: #F5E1B8;
-  --cream: #F6F1E8;
-  --ink: #1C1C1C;
-  --muted: #6B7280;
+  /* Colours taken from ngiproperty.com (Oct 2026) */
+  --navy: #173F45;       /* main dark teal (header bar, WhatsApp button) */
+  --navy-2: #102F34;     /* deeper teal */
+  --gold: #B58A4A;       /* bronze, NGI logo / accents */
+  --gold-light: #E7D2AE; /* light bronze for text on teal */
+  --accent: #F7941D;     /* orange links / highlights */
+  --cream: #FBFAF7;      /* page background */
+  --ink: #222222;        /* body text */
+  --muted: #607579;      /* secondary text */
+  --display-font: 'Plus Jakarta Sans', 'Montserrat', 'DejaVu Sans', sans-serif;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 .card {
   width: 1080px; height: 1350px; position: relative; overflow: hidden;
-  font-family: 'Montserrat', 'Inter', 'DejaVu Sans', sans-serif; color: #fff;
+  font-family: 'Plus Jakarta Sans', 'Montserrat', 'DejaVu Sans', sans-serif; color: #fff;
 }
-.serif { font-family: 'Playfair Display', Georgia, 'DejaVu Serif', serif; }
+.serif { font-family: var(--display-font); font-weight: 800; letter-spacing: -0.5px; }
 
 /* Photo stage: the WHOLE photo (object-fit: contain) on a blurred, darkened copy of itself — nothing is cropped,
    so the NGI logo already printed on the photo always stays visible. */
@@ -25,7 +28,7 @@ html, body { margin: 0; padding: 0; }
 }
 .stage .fg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; }
 
-.kicker { font-size: 24px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); }
+.kicker { font-size: 24px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); }
 .empty-hide:empty { display: none; }
 
 /* Footer: website + phone */
