@@ -19,13 +19,11 @@ html, body { margin: 0; padding: 0; }
 }
 .serif { font-family: var(--display-font); font-weight: 800; letter-spacing: -0.5px; }
 
-/* Photo stage: the WHOLE photo (object-fit: contain) on a blurred, darkened copy of itself — nothing is cropped,
-   so the NGI logo already printed on the photo always stays visible. */
-.stage { position: absolute; overflow: hidden; background: #0b0b0b; }
-.stage .bg {
-  position: absolute; left: -60px; top: -60px; width: calc(100% + 120px); height: calc(100% + 120px);
-  object-fit: cover; filter: blur(32px) brightness(0.55) saturate(1.1);
-}
+/* Photo stage: the WHOLE photo (object-fit: contain) on the brand teal — nothing is cropped,
+   so the NGI logo already printed on the photo always stays visible.
+   (Owner, 26 Oct: no blurred copy of the photo above/below it any more.) */
+.stage { position: absolute; overflow: hidden; background: #173F45; }
+.stage .bg { display: none; }
 .stage .fg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; }
 
 .kicker { font-size: 24px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); }
