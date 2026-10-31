@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>NGI — Luxury minimal</title>
-<!-- Fields: highlight, typeLabel, city, priceText -->
+<!-- Fields: highlight, typeLabel, city, priceLabel ("DOWN PAYMENT FROM"), priceText -->
 <style>
   .card { background: #050505; }
   .stage { left: 0; top: 0; width: 1080px; height: 1350px; }
@@ -27,7 +27,7 @@
     <div class="line"></div>
     <div class="headline serif">{{highlight}}</div>
     <div class="meta"><span>{{typeLabel}}</span><span>{{city}}</span></div>
-    <div class="price">FROM {{priceText}}</div>
+    <div class="price">{{priceLabel}} {{priceText}}</div>
   </div>
   <div class="footer">
     <div class="item">{{website}}</div>
