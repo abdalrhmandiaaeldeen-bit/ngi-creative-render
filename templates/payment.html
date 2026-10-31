@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>NGI — Payment plan</title>
-<!-- Fields: kicker, headline, dpPercent ("10%"), yearsText ("4"), priceShort ("EGP 2.96M"), specsText -->
+<!-- Fields: kicker, headline, dpPercent ("10%"), yearsText ("4"), priceShort ("EGP 1,350,000"), priceShortLabel ("Down payment from"), specsText -->
 <style>
   .card { background: var(--cream); color: var(--navy); }
   .top { position: absolute; left: 70px; top: 64px; right: 70px; }
@@ -30,7 +30,7 @@
   <div class="stats">
     <div class="stat"><div class="v">{{dpPercent}}</div><div class="l">Down payment</div></div>
     <div class="stat"><div class="v">{{yearsText}}<small> yrs</small></div><div class="l">Installments</div></div>
-    <div class="stat price"><div class="v">{{priceShort}}</div><div class="l">Starting price</div></div>
+    <div class="stat price"><div class="v">{{priceShort}}</div><div class="l">{{priceShortLabel}}</div></div>
   </div>
   <div class="specs empty-hide">{{specsText}}</div>
   <div class="footer">
