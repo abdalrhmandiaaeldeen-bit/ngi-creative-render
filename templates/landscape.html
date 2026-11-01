@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="ngi-size" content="1080x608">
+<title>NGI — Landscape</title>
+<!-- Fields (empty ones disappear): kicker ("MAKADI BAY · RED SEA"), titleText ("Grand Villa in Siyal"),
+     byText ("by Orascom Development · Makadi Bay"), priceLabel ("DOWN PAYMENT FROM"), priceText ("EGP 2,925,000"),
+     planLabel ("INSTALLMENTS"), planText ("Up to 4 years"), detailText ("4 Bedrooms · 192 m²"), website, phone.
+     Owner 1 Nov 2026: photo-led designs like the first posts; never the full price (31 Oct rule). A 1080x608 landscape post: the whole photo shows, logo included. -->
+<style>
+  * { box-sizing: border-box; } body { margin: 0; }
+  .card { position: relative; overflow: hidden; font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif; }
+  .pf { font-family: 'Playfair Display', Georgia, serif; }
+  .e:empty { display: none; }
+  .ft { position: absolute; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
+  .ft .it { display: flex; align-items: center; gap: 12px; }
+  .ft svg { width: 26px; height: 26px; }
+  .card { width: 1080px; height: 608px; background: #111; color: #fff; }
+  .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0% 0%; }
+  .sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,.78) 100%); }
+  .tx { position: absolute; left: 44px; right: 44px; bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
+  .ti { font-size: 40px; line-height: 1.1; }
+  .by { font-size: 19px; opacity: .92; margin-top: 6px; }
+  .rt { text-align: right; }
+  .lb { font-size: 17px; font-weight: 700; letter-spacing: 3.4px; color: #D9B36C; }
+  .pr { font-size: 46px; font-weight: 700; line-height: 1.1; }
+  .ph2 { font-size: 18px; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <img class="ph" src="{{photoDataUri}}">
+  <div class="sh"></div>
+  <div class="tx">
+    <div><div class="ti pf e">{{titleText}}</div><div class="by e">{{byText}}</div></div>
+    <div class="rt"><div class="lb e">{{priceLabel}}</div><div class="pr pf e">{{priceText}}</div><div class="ph2">{{phone}}</div></div>
+  </div>
+</div>
+</body>
+</html>

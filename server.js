@@ -37,6 +37,11 @@ function injectShared(html) {
 }
 
 const SIZE = { width: 1080, height: 1350 };
+// A template can set its own canvas size: <meta name="ngi-size" content="1080x608"> (e.g. a landscape post).
+function sizeOf(html) {
+  const m = String(html).match(/<meta\s+name="ngi-size"\s+content="(\d{3,4})x(\d{3,4})"/i);
+  return m ? { width: Number(m[1]), height: Number(m[2]) } : SIZE;
+}
 
 function escapeHtml(str) {
   return String(str ?? '')
@@ -53,7 +58,7 @@ function escapeHtml(str) {
 function fillTemplate(html, data) {
   return html.replace(/\{\{(\w+)\}\}/g, (match, key) => {
     if (!(key in data) || data[key] == null) return '';
-    if (key === 'photoDataUri' || /Color$/i.test(key)) return data[key];
+    if (key === 'photoDataUri' || key === 'photo2DataUri' || /Color$/i.test(key)) return data[key];
     return escapeHtml(data[key]);
   });
 }
@@ -135,7 +140,7 @@ function getBrowser() {
 
 app.post('/render', async (req, res) => {
   try {
-    const { template, photoBase64, pillarboxColor: overrideColor, ...fields } = req.body || {};
+    const { template, photoBase64, photo2Base64, pillarboxColor: overrideColor, ...fields } = req.body || {};
 
     if (!template || !TEMPLATES[template]) {
       return res.status(400).json({ error: `Unknown template "${template}". Use ${Object.keys(TEMPLATES).join(' | ')}.` });
@@ -147,6 +152,8 @@ app.post('/render', async (req, res) => {
     const buffer = Buffer.from(photoBase64, 'base64');
     const mime = detectMime(buffer);
     const photoDataUri = `data:${mime};base64,${photoBase64}`;
+    // Optional second photo (template "duo": outside view + inside view). Falls back to the first photo.
+    const photo2DataUri = photo2Base64 ? `data:${detectMime(Buffer.from(photo2Base64, 'base64'))};base64,${photo2Base64}` : photoDataUri;
 
     // Only "highlight" still uses pillarbox bars; "pricecard" and "lifestyle"
     // are full-bleed, so skip the extra image-processing work for them.
@@ -161,11 +168,12 @@ app.post('/render', async (req, res) => {
       phone: '+20 122 444 9009',
       ...fields,
       photoDataUri,
+      photo2DataUri,
       pillarboxColor,
     });
 
     const browser = await getBrowser();
-    const page = await browser.newPage({ viewport: SIZE });
+    const page = await browser.newPage({ viewport: sizeOf(TEMPLATES[template]) });
     await page.setContent(html, { waitUntil: 'networkidle', timeout: 15000 });
     const png = await page.screenshot({ type: 'png' });
     await page.close();

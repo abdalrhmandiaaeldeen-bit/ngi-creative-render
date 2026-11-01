@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NGI — Editorial</title>
+<!-- Fields (empty ones disappear): kicker ("MAKADI BAY · RED SEA"), titleText ("Grand Villa in Siyal"),
+     byText ("by Orascom Development · Makadi Bay"), priceLabel ("DOWN PAYMENT FROM"), priceText ("EGP 2,925,000"),
+     planLabel ("INSTALLMENTS"), planText ("Up to 4 years"), detailText ("4 Bedrooms · 192 m²"), website, phone.
+     Owner 1 Nov 2026: photo-led designs like the first posts; never the full price (31 Oct rule). Photo is anchored top-left so the NGI logo printed on it is never cut. -->
+<style>
+  * { box-sizing: border-box; } body { margin: 0; }
+  .card { position: relative; overflow: hidden; font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif; }
+  .pf { font-family: 'Playfair Display', Georgia, serif; }
+  .e:empty { display: none; }
+  .ft { position: absolute; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
+  .ft .it { display: flex; align-items: center; gap: 12px; }
+  .ft svg { width: 26px; height: 26px; }
+  .card { width: 1080px; height: 1350px; background: #F6F1E7; color: #173F45; }
+  .ph { position: absolute; left: 0; top: 0; width: 1080px; height: 800px; object-fit: cover; object-position: 0% 0%; }
+  .tx { position: absolute; left: 80px; right: 80px; top: 855px; }
+  .kc { font-size: 22px; font-weight: 700; letter-spacing: 5px; color: #B58A4A; }
+  .ti { font-size: 60px; line-height: 1.12; margin-top: 18px; }
+  .by { font-size: 26px; color: #3D5C60; margin-top: 12px; }
+  .rl { height: 2px; background: #B58A4A; opacity: .55; margin: 38px 0 30px; }
+  .row { display: flex; gap: 70px; }
+  .row > div:has(.v:empty) { display: none; }
+  .l { font-size: 20px; font-weight: 700; letter-spacing: 3.6px; color: #B58A4A; }
+  .v { font-size: 48px; font-weight: 700; margin-top: 4px; }
+  .ft { left: 80px; right: 80px; bottom: 44px; font-size: 24px; color: #173F45; }
+</style>
+</head>
+<body>
+<div class="card">
+  <img class="ph" src="{{photoDataUri}}">
+  <div class="tx">
+    <div class="kc e">{{kicker}}</div>
+    <div class="ti pf e">{{titleText}}</div>
+    <div class="by e">{{byText}}</div>
+    <div class="rl"></div>
+    <div class="row">
+      <div><div class="l">{{priceLabel}}</div><div class="v pf">{{priceText}}</div></div>
+      <div><div class="l">{{planLabel}}</div><div class="v pf">{{planText}}</div></div>
+    </div>
+  </div>
+  <div class="ft"><div class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.8 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.8-3.8-9S9.5 5.5 12 3Z"/></svg><span>{{website}}</span></div><div class="it"><span>{{phone}}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6.6 10.8c1.5 3 4.1 5.6 7.1 7.1l2.4-2.4c.3-.3.7-.4 1.1-.3 1.3.4 2.7.6 4.1.6.7 0 1.2.6 1.2 1.3v3.6c0 .7-.6 1.3-1.3 1.3C10.8 22 2 13.2 2 2.3 2 1.6 2.6 1 3.3 1h3.6c.7 0 1.3.5 1.3 1.2 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.1L6.6 10.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</div>
+</body>
+</html>
