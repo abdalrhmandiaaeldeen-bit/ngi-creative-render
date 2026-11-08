@@ -36,6 +36,10 @@ function injectShared(html) {
   return /<head>/i.test(html) ? html.replace(/<head>/i, '<head>' + css) : css + html;
 }
 
+// NGI logo (gold, soft shadow) for the full-bleed templates (hero, headline, glass, side, statement): {{logoDataUri}}
+const LOGO_FILE = path.join(__dirname, 'assets', 'ngi-logo-shadow.png');
+const LOGO_DATA_URI = fs.existsSync(LOGO_FILE) ? 'data:image/png;base64,' + fs.readFileSync(LOGO_FILE).toString('base64') : '';
+
 const SIZE = { width: 1080, height: 1350 };
 // A template can set its own canvas size: <meta name="ngi-size" content="1080x608"> (e.g. a landscape post).
 function sizeOf(html) {
@@ -58,7 +62,7 @@ function escapeHtml(str) {
 function fillTemplate(html, data) {
   return html.replace(/\{\{(\w+)\}\}/g, (match, key) => {
     if (!(key in data) || data[key] == null) return '';
-    if (key === 'photoDataUri' || key === 'photo2DataUri' || /Color$/i.test(key)) return data[key];
+    if (key === 'photoDataUri' || key === 'photo2DataUri' || key === 'logoDataUri' || /Color$/i.test(key)) return data[key];
     return escapeHtml(data[key]);
   });
 }
@@ -169,6 +173,7 @@ app.post('/render', async (req, res) => {
       ...fields,
       photoDataUri,
       photo2DataUri,
+      logoDataUri: LOGO_DATA_URI,
       pillarboxColor,
     });
 
